@@ -71,3 +71,19 @@ createInertiaApp({
 
 
 master_laravel6_with_vuejs_fullstack_develop
+
+
+
+#FullCalendar
+
+npm install --save \ @fullcalendar/core \ @fullcalendar/timegrid
+
+or package.json add the below code and npm update
+
+"dependencies": {
+        "@fullcalendar/daygrid": "^6.1.15",
+        "@fullcalendar/interaction": "^6.1.15",
+        "@fullcalendar/timegrid": "^6.1.15",
+        "@fullcalendar/vue3": "^6.1.15",
+        "@inertiajs/vue3": "^1.2.0"
+    }
