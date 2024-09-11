@@ -2,20 +2,21 @@
 import FullCalendar from "@fullcalendar/vue3";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import timeGridPlugin from "@fullcalendar/timegrid"; // Import the time grid plugin
+import timeGridPlugin from "@fullcalendar/timegrid";
+import { ref } from "vue";
 
 // Define your calendar options
-const calendarOptions = {
-    plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin], // Include the time grid plugin
-    initialView: "timeGridWeek", // Set initial view to time grid week
-    slotDuration: "00:30:00", // Set time slot duration to 30 minutes
-    slotLabelInterval: "01:00", // Label every hour
-    slotMinTime: "08:00:00", // Earliest time displayed on the calendar
-    slotMaxTime: "18:00:00", // Latest time displayed on the calendar
-    timeZone: "local", // Match browser's timezone
-    dateClick(info) {
-        console.log("Date clicked: ", info.dateStr);
-    },
+const calendarOptions = ref({
+    plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin], // Include necessary plugins
+    initialView: "timeGridWeek", // Start with the week view
+    slotDuration: "00:30:00", // 30-minute slots
+    slotMinTime: "08:00:00", // Start of the calendar time
+    slotMaxTime: "18:00:00", // End of the calendar time
+    timeZone: "local", // Use local timezone
+    events: [], // Initially empty events
+    selectable: true, // Allow selecting time slots
+    select: handleSelect, // Bind the select event handler
+
     events: [
         {
             title: "Meeting with John",
@@ -39,7 +40,39 @@ const calendarOptions = {
         },
     ],
     initialDate: "2023-09-10", // Ensure this matches the events' date range
-};
+});
+
+// Event handler for adding new events
+function handleSelect(info) {
+    console.log(info);
+    const title = prompt("Enter Event Title");
+    if (title) {
+        calendarOptions.value.events.push({
+            title,
+            start: info.startStr,
+            end: info.endStr,
+            allDay: info.allDay,
+        });
+
+        //store data
+        // Store the event in the database
+        // router.post(route('events.store'), newEvent, {
+        //     onSuccess: (response) => {
+        //         // Add the event to the calendar
+        //         calendarOptions.value.events.push({
+        //             title: response.props.event.title,
+        //             start: response.props.event.start,
+        //             end: response.props.event.end,
+        //         });
+        //     },
+        //     onError: (error) => {
+        //         console.error("Error storing the event:", error);
+        //     },
+        // });
+    }
+    // Clear the selection
+    info.view.calendar.unselect();
+}
 </script>
 
 <template>
