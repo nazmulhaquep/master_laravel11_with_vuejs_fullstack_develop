@@ -11,6 +11,7 @@ const props = defineProps(["events"]);
 const calendarOptions = ref({
     plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin], // Include necessary plugins
     initialView: "timeGridWeek", // Start with the week view
+    // slotDuration: "00:30:00", // 30-minute slots
     slotDuration: "1:00:00", // 30-minute slots
     slotMinTime: "08:00:00", // Start of the calendar time
     slotMaxTime: "18:00:00", // End of the calendar time
