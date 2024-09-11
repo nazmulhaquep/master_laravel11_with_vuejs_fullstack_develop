@@ -19,6 +19,7 @@ const calendarOptions = ref({
     events: [], // Initially empty events
     selectable: true, // Allow selecting time slots
     select: handleSelect, // Bind the select event handler
+    eventClick: handleEventClick, // Bind the event click handler
     events: props.events,
     // events: [
     //     {
@@ -75,6 +76,12 @@ function handleSelect(info) {
     }
     // Clear the selection
     info.view.calendar.unselect();
+}
+
+// Event handler for clicking on an event
+function handleEventClick(info) {
+    alert(`Event clicked: ${info.event.title}`);
+    // Implement additional logic here based on criteria or event data
 }
 </script>
 
