@@ -5,41 +5,43 @@ import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import { ref } from "vue";
 
+const props = defineProps(["events"]);
+
 // Define your calendar options
 const calendarOptions = ref({
     plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin], // Include necessary plugins
     initialView: "timeGridWeek", // Start with the week view
-    slotDuration: "00:30:00", // 30-minute slots
+    slotDuration: "1:00:00", // 30-minute slots
     slotMinTime: "08:00:00", // Start of the calendar time
     slotMaxTime: "18:00:00", // End of the calendar time
     timeZone: "local", // Use local timezone
     events: [], // Initially empty events
     selectable: true, // Allow selecting time slots
     select: handleSelect, // Bind the select event handler
-
-    events: [
-        {
-            title: "Meeting with John",
-            start: "2023-09-10T09:30:00", // Start time in time slot
-            end: "2023-09-10T10:30:00", // End time
-        },
-        {
-            title: "Lunch Break",
-            start: "2023-09-10T12:00:00",
-            end: "2023-09-10T13:00:00",
-        },
-        {
-            title: "Conference Call",
-            start: "2023-09-11T14:00:00",
-            end: "2023-09-11T15:00:00",
-        },
-        {
-            title: "Project Review",
-            start: "2023-09-11T16:00:00",
-            end: "2023-09-11T17:00:00",
-        },
-    ],
-    initialDate: "2023-09-10", // Ensure this matches the events' date range
+    events: props.events,
+    // events: [
+    //     {
+    //         title: "Meeting with John",
+    //         start: "2023-09-10T09:30:00", // Start time in time slot
+    //         end: "2023-09-10T10:30:00", // End time
+    //     },
+    //     {
+    //         title: "Lunch Break",
+    //         start: "2023-09-10T12:00:00",
+    //         end: "2023-09-10T13:00:00",
+    //     },
+    //     {
+    //         title: "Conference Call",
+    //         start: "2023-09-11T14:00:00",
+    //         end: "2023-09-11T15:00:00",
+    //     },
+    //     {
+    //         title: "Project Review",
+    //         start: "2023-09-11T16:00:00",
+    //         end: "2023-09-11T17:00:00",
+    //     },
+    // ],
+    // initialDate: "2023-09-10", // Ensure this matches the events' date range
 });
 
 // Event handler for adding new events
