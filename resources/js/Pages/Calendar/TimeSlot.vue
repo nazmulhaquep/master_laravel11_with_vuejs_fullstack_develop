@@ -20,7 +20,11 @@ const calendarOptions = ref({
     selectable: true, // Allow selecting time slots
     select: handleSelect, // Bind the select event handler
     eventClick: handleEventClick, // Bind the event click handler
-    events: props.events,
+    events: props.events.map((event) => ({
+        ...event,
+        backgroundColor: getEventColor(event.title), // Add color based on title or other criteria
+    })), // Bind the dynamic events list with color
+    // events: props.events,
     // events: [
     //     {
     //         title: "Meeting with John",
@@ -56,6 +60,7 @@ function handleSelect(info) {
             start: info.startStr,
             end: info.endStr,
             allDay: info.allDay,
+            backgroundColor: getEventColor(title),
         });
 
         //store data
@@ -82,6 +87,16 @@ function handleSelect(info) {
 function handleEventClick(info) {
     alert(`Event clicked: ${info.event.title}`);
     // Implement additional logic here based on criteria or event data
+}
+
+// Function to determine event color based on some criteria
+function getEventColor(title) {
+    if (title.includes("Available")) {
+        return "lightblue"; // Example color for meetings
+    } else if (title.includes("Booked")) {
+        return "darkred"; // Example color for breaks
+    }
+    return "lightgrey"; // Default color
 }
 </script>
 

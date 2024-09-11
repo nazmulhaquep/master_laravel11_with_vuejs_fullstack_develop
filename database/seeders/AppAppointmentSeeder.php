@@ -15,20 +15,21 @@ class AppAppointmentSeeder extends Seeder
      */
     public function run(): void
     {
-        $faker = Faker::create();
+        // $faker = Faker::create();
 
-        // Generate random start and finish times
-        $startTime = $faker->dateTimeBetween('-1 month', '+1 month');
-        $finishTime = (clone $startTime)->modify('+1 hour');
+        // // Generate random start and finish times
+        // $startTime = $faker->dateTimeBetween('-1 month', '+1 month');
+        // $finishTime = (clone $startTime)->modify('+1 hour');
 
-        Appointment::factory()->create([
-            'start_time' => $startTime,
-            'finish_time' => $finishTime,
-            'comments' => $faker->sentence(),  // Generate random comment
-            'client_id' => User::inRandomOrder()->first()->id, // Random existing client
-            'employee_id' => User::inRandomOrder()->first()->id, // Random existing employee
-        ]);
-
+        // Appointment::factory()->create([
+        //     'start_time' => $startTime,
+        //     'finish_time' => $finishTime,
+        //     'comments' => $faker->randomElement(['Available', 'Booked']),  // Generate random comment
+        //     'client_id' => User::inRandomOrder()->first()->id, // Random existing client
+        //     'employee_id' => User::inRandomOrder()->first()->id, // Random existing employee
+        // ]);
+        //data format take from factory
+        //php artisan make:factory AppointmentFactory --model=Appointment
         Appointment::factory(20)->create();  // Generate 20 random appointments
     }
 }

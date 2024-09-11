@@ -32,7 +32,7 @@ class AppointmentController extends Controller
         // Transform appointments into events format for FullCalendar
         $events = $appointments->map(function ($appointment) {
             return [
-                'title' => $appointment->client->name . ' (' . $appointment->employee->name . ')',
+                'title' => $appointment->comments,
                 'start' => $appointment->start_time,
                 'end' => $appointment->finish_time,
             ];
